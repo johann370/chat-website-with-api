@@ -3,7 +3,7 @@ const heroku_url = "https://chat-api-johann.herokuapp.com";
 
 function get_user_servers() {
     user_id = sessionStorage.getItem("user_id");
-    fetch(`${dev_url}/users/${user_id}/servers`, {
+    fetch(`${heroku_url}/users/${user_id}/servers`, {
         method: "GET",
     })
         .then(response => response.json())
@@ -27,7 +27,7 @@ function get_server_members() {
 
     const server_members_div = document.getElementById("server_members_div");
 
-    fetch(`${dev_url}/servers/${server_id}/members`, {
+    fetch(`${heroku_url}/servers/${server_id}/members`, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token")
@@ -49,7 +49,7 @@ function createServer() {
     const create_server_form = document.getElementById("create_server_form");
     const formData = new FormData(create_server_form);
 
-    fetch(`${dev_url}/servers`, {
+    fetch(`${heroku_url}/servers`, {
         method: "POST",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
@@ -85,7 +85,7 @@ function joinServer() {
     const join_server_form = document.getElementById("join_server_form");
     const formData = new FormData(join_server_form);
 
-    fetch(`${dev_url}/servers/${formData.get("server_id")}`, {
+    fetch(`${heroku_url}/servers/${formData.get("server_id")}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
@@ -123,7 +123,7 @@ function signup() {
     if (formData.get("username") !== "" && formData.get("email") !== "" && formData.get("password") !== "" && formData.get("password_repeat") !== "") {
         if (formData.get("password") === formData.get("password_repeat")) {
 
-            fetch(`${dev_url}/users`, {
+            fetch(`${heroku_url}/users`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -193,7 +193,7 @@ function load_messages() {
     var server_id = document.getElementById("server_select").value;
     const chatbox = document.getElementById("chatbox_div");
     chatbox.innerHTML = "";
-    fetch(`${dev_url}/messages/${server_id}`, {
+    fetch(`${heroku_url}/messages/${server_id}`, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token")
@@ -218,7 +218,7 @@ function send_message() {
 
     if (formData.get("content") !== "") {
         var server_id = document.getElementById("server_select").value;
-        fetch(`${dev_url}/messages/${server_id}`, {
+        fetch(`${heroku_url}/messages/${server_id}`, {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -238,7 +238,7 @@ function login() {
     const formData = new FormData(login_form);
 
     if (formData.get("username") !== "" && formData.get("password") !== "") {
-        fetch(`${dev_url}/login`, {
+        fetch(`${heroku_url}/login`, {
             method: "POST",
             body: formData
         })
@@ -258,6 +258,7 @@ function login() {
                 } else {
                     localStorage.setItem("access_token", data["access_token"])
                     sessionStorage.setItem("user_id", data["user_id"]);
+                    console.log(data);
                     document.location = "index.html";
                 }
             })
