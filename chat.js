@@ -1,6 +1,8 @@
+const dev_url = "http://127.0.0.1:8000";
+
 function get_user_servers() {
     user_id = sessionStorage.getItem("user_id");
-    fetch(`http://127.0.0.1:8000/users/${user_id}/servers`, {
+    fetch(`${dev_url}/users/${user_id}/servers`, {
         method: "GET",
     })
         .then(response => response.json())
@@ -24,7 +26,7 @@ function get_server_members() {
 
     const server_members_div = document.getElementById("server_members_div");
 
-    fetch(`http://127.0.0.1:8000/servers/${server_id}/members`, {
+    fetch(`${dev_url}/servers/${server_id}/members`, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token")
