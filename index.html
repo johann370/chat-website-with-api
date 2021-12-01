@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="header_nav">
+        <script>
+            if (localStorage.getItem("access_token") == null && sessionStorage.getItem("user_id") == null) {
+                const div = document.getElementById("header_nav");
+                var a = document.createElement("a");
+                var node = document.createTextNode("Log in");
+                a.appendChild(node);
+                a.href = "login.html";
+                div.appendChild(a);
+
+                var a = document.createElement("a");
+                var node = document.createTextNode("Sign up");
+                a.appendChild(node);
+                a.href = "signup.html";
+                div.appendChild(a);
+            } else {
+                const div = document.getElementById("header_nav");
+                var a = document.createElement("a");
+                var node = document.createTextNode("Chat");
+                a.appendChild(node);
+                a.href = "chat.html";
+                div.appendChild(a);
+            }
+        </script>
+    </div>
+</body>
+
+</html>

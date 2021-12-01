@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="messages.js"></script>
+    <script src="chat.js"></script>
+    <script src="logout.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="header_nav">
+        <a href="#" onclick="logout()">Log out</a>
+        <a href="create-server.html">Create server</a>
+        <a href="join-server.html">Join server</a>
+    </div>
+
+    <div id="server_div">
+        <label for="server_select">Server List:</label>
+        <select name="servers" id="server_select" onchange="load_messages(); get_server_members();">
+            <option value="">--Please choose an option--</option>
+            <script>
+                get_user_servers();
+            </script>
+        </select>
+
+
+        <div id="server_members_div">
+            <h2>Server Members</h2>
+            <ul id="server_members_list"></ul>
+        </div>
+    </div>
+
+    <div id="chatbox_div">
+    </div>
+
+    <div id="message_div">
+        <form id="message_form">
+            <input type="text" id="content" name="content">
+            <button onclick="send_message()" id="send_button">Send</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
